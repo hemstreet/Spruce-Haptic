@@ -4,6 +4,7 @@
 
 WebSocketClient client;
 
+
 // If using software SPI (the default case):
 #define OLED_MOSI   D0
 #define OLED_CLK    D1
@@ -16,19 +17,13 @@ Adafruit_SSD1306 display(OLED_MOSI, OLED_CLK, OLED_DC, OLED_RESET, OLED_CS);
 #error("Height incorrect, please fix Adafruit_SSD1306.h!");
 #endif
 
-void onMessage(WebSocketClient client, char* message) {
-  Serial.print("Received: ");
-  Serial.println(message);
-}
-
 int isVibrating = 0;
 
 void setup()   {                
     Serial.begin(9600);
+//    client.onMessage(onMessage);
+    client.connect("appointments.spruce.me", 443, "https");
 
-    client.onMessage(onMessage);
-    client.connect("https://appointments.spruce.me"); 
-  //client.connect("appointments.spruce.me", 443, 'https'); 
   pinMode(D7, OUTPUT);
   
   // by default, we'll generate the high voltage from the 3.3v line internally! (neat!)
@@ -37,10 +32,13 @@ void setup()   {
   // init done
   
   display.clearDisplay();
-  
-  display.setTextSize(2);
+
+  display.setTextSize(1.5);
   display.setTextColor(WHITE);
-  display.println("Spruce!");
+  display.println("Shoe Request");
+  display.println("Type: Para Black");
+  display.println("Size: 10 1/2");
+  display.println("Qty: 2");
   display.display();
   delay(2000);
   
@@ -49,16 +47,9 @@ void setup()   {
 void loop() {
       
     client.monitor();
-    delay(3000);
-    client.send("Hello World!");
-      
-    //digitalWrite(D7, (isVibrating) ? HIGH : LOW);
-    //isVibrating = !isVibrating;
-    //delay(2500);
-    
-}
 
-void onMessage(WebSocketClient client, char* message) {
-  Serial.print("Received: ");
-  Serial.println(message);
+//    digitalWrite(D7, (isVibrating) ? HIGH : LOW);
+//    isVibrating = !isVibrating;
+//    delay(2500);
+    
 }

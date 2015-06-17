@@ -109,6 +109,7 @@ void WebSocketClient::reconnect() {
 	{
 		byte ip[4];
 		sscanf(_hostname, "%hhu.%hhu.%hhu.%hhu", &ip[0], &ip[1], &ip[2], &ip[3]);
+
 		isconnected = _client.connect(ip, _port);
 	}
 	else
@@ -124,6 +125,7 @@ void WebSocketClient::reconnect() {
 		result = readHandshake();
 	}
   if(!result) {
+
 	#ifdef DEBUGGING
 		Serial.println("Connection Failed!");
 	#endif
@@ -136,6 +138,7 @@ void WebSocketClient::reconnect() {
           _onOpen(*this);
       }
   }
+
 }
 
 bool WebSocketClient::connected() {

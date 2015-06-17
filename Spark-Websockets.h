@@ -27,9 +27,9 @@
 #ifndef WEBSOCKETCLIENT_H
 #define WEBSOCKETCLIENT_H
 
-//#define HANDSHAKE // uncomment to print out the sent and received handshake messages
-//#define TRACE // uncomment to support TRACE level debugging of wire protocol
-//#define DEBUG // turn on debugging
+#define HANDSHAKE // uncomment to print out the sent and received handshake messages
+#define TRACE // uncomment to support TRACE level debugging of wire protocol
+#define DEBUG // turn on debugging
 
 #define RETRY_TIMEOUT 3000
 
@@ -55,15 +55,23 @@ public:
   void onError(OnError function);
   bool send(char* message);
 private:
+//String WebSocketClientStringTable = {
+//			"GET / HTTP/1.1\x0d\x0a"
+//			"Upgrade: websocket\x0d\x0a"
+//			"Connection: Upgrade\x0d\x0a"
+//			"Host: {0}:{1}\x0d\x0a"
+//			"Origin: SparkWebSocketClient\x0d\x0a"
+//			"Sec-WebSocket-Key:  1VTFj/CydlBCZDucDqw8eA==\x0d\x0a"
+//			"Sec-WebSocket-Version: 13\x0d\x0a"
+//			"\x0d\x0a"};
 String WebSocketClientStringTable = {
-			"GET / HTTP/1.1\x0d\x0a"
-			"Upgrade: websocket\x0d\x0a"
-			"Connection: Upgrade\x0d\x0a"
-			"Host: {0}:{1}\x0d\x0a"
-			"Origin: SparkWebSocketClient\x0d\x0a"
-			"Sec-WebSocket-Key:  1VTFj/CydlBCZDucDqw8eA==\x0d\x0a"
-			"Sec-WebSocket-Version: 13\x0d\x0a"
-			"\x0d\x0a"};
+        "GET / HTTP/1.1\x0d\x0a"
+        "Upgrade: WebSocket\x0d\x0a"
+        "Connection: Upgrade\x0d\x0a"
+        "Host: {0}:{1}\x0d\x0a"
+        "Origin: SparkWebSocketClient\x0d\x0a"
+        "\x0d\x0a"};
+
   const char* _hostname;
   const byte* _host;
   int _port;
