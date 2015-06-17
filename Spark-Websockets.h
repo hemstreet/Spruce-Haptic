@@ -40,20 +40,34 @@
 
 class WebSocketClient {
 public:
-  typedef void (*OnMessage)(WebSocketClient client, char* message);
-  typedef void (*OnOpen)(WebSocketClient client);
-  typedef void (*OnClose)(WebSocketClient client, int code, char* message);
-  typedef void (*OnError)(WebSocketClient client, char* message);
-  void connect(const char hostname[], int port = 80, const char protocol[] = NULL, const char path[] = "/");
-  void connect(const byte host[], int port = 80, const char protocol[] = NULL, const char path[] = "/");
-  bool connected();
-  void disconnect();
-  void monitor();
-  void onOpen(OnOpen function);
-  void onClose(OnClose function);
-  void onMessage(OnMessage function);
-  void onError(OnError function);
-  bool send(char* message);
+    typedef void (*OnMessage)(WebSocketClient client, char *message);
+
+    typedef void (*OnOpen)(WebSocketClient client);
+
+    typedef void (*OnClose)(WebSocketClient client, int code, char *message);
+
+    typedef void (*OnError)(WebSocketClient client, char *message);
+
+    void connect(const char hostname[], int port = 80, const char protocol[] = NULL, const char path[] = "/");
+
+    void connect(const byte host[], int port = 80, const char protocol[] = NULL, const char path[] = "/");
+
+    bool connected();
+
+    void disconnect();
+
+    void monitor();
+
+    void onOpen(OnOpen function);
+
+    void onClose(OnClose function);
+
+    void onMessage(OnMessage function);
+
+    void onError(OnError function);
+
+    bool send(char *message);
+
 private:
 //String WebSocketClientStringTable = {
 //			"GET / HTTP/1.1\x0d\x0a"
@@ -64,44 +78,54 @@ private:
 //			"Sec-WebSocket-Key:  1VTFj/CydlBCZDucDqw8eA==\x0d\x0a"
 //			"Sec-WebSocket-Version: 13\x0d\x0a"
 //			"\x0d\x0a"};
-String WebSocketClientStringTable = {
-        "GET / HTTP/1.1\x0d\x0a"
-        "Upgrade: WebSocket\x0d\x0a"
-        "Connection: Upgrade\x0d\x0a"
-        "Host: {0}:{1}\x0d\x0a"
-        "Origin: SparkWebSocketClient\x0d\x0a"
-        "\x0d\x0a"};
+    String WebSocketClientStringTable = {
+            "GET / HTTP/1.1\x0d\x0a"
+                    "Upgrade: WebSocket\x0d\x0a"
+                    "Connection: Upgrade\x0d\x0a"
+                    "Host: {0}:{1}\x0d\x0a"
+                    "Origin: SparkWebSocketClient\x0d\x0a"
+                    "\x0d\x0a"};
 
-  const char* _hostname;
-  const byte* _host;
-  int _port;
-  const char* _path;
-  const char* _protocol;
-  bool _canConnect;
-  bool _reconnecting;
-  unsigned long _retryTimeout;
-  void reconnect();
-  void sendHandshake(const char* hostname, const char* path, const char* protocol);
-  virtual int nextBytes(uint8_t *buffer, size_t size);
-  TCPClient _client;
-  OnOpen _onOpen;
-  OnClose _onClose;
-  OnMessage _onMessage;
-  OnError _onError;
-  char* _packet;
-  uint8_t* _buffer;
-  uint16_t _offset;
-  uint16_t _total;
-  unsigned int _packetLength;
-  byte _opCode;
-  bool readHandshake();
-  void readLine(char* buffer);
-  void generateHash(char* buffer, size_t bufferlen);
-  size_t base64Encode(byte* src, size_t srclength, char* target, size_t targetsize);
-  byte nextByte();
-  uint8_t _num;
-  
-  
+    const char *_hostname;
+    const byte *_host;
+    int _port;
+    const char *_path;
+    const char *_protocol;
+    bool _canConnect;
+    bool _reconnecting;
+    unsigned long _retryTimeout;
+
+    void reconnect();
+
+    void sendHandshake(const char *hostname, const char *path, const char *protocol);
+
+    virtual int nextBytes(uint8_t *buffer, size_t size);
+
+    TCPClient _client;
+    OnOpen _onOpen;
+    OnClose _onClose;
+    OnMessage _onMessage;
+    OnError _onError;
+    char *_packet;
+    uint8_t *_buffer;
+    uint16_t _offset;
+    uint16_t _total;
+    unsigned int _packetLength;
+    byte _opCode;
+
+    bool readHandshake();
+
+    void readLine(char *buffer);
+
+    void generateHash(char *buffer, size_t bufferlen);
+
+    size_t base64Encode(byte *src, size_t srclength, char *target, size_t targetsize);
+
+    byte nextByte();
+
+    uint8_t _num;
+
+
 };
 
 const char b64Alphabet[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";

@@ -27,7 +27,7 @@ All text above, and the splash screen must be included in any redistribution
 #define BLACK 0
 #define WHITE 1
 
-#define SSD1306_I2C_ADDRESS   0x3D	// 011110+SA0+RW - 0x3C or 0x3D
+#define SSD1306_I2C_ADDRESS   0x3D    // 011110+SA0+RW - 0x3C or 0x3D
 // Address for 128x32 is 0x3C
 // Address for 128x64 is 0x3D (default) or 0x3C (if SA0 is grounded)
 
@@ -55,8 +55,8 @@ All text above, and the splash screen must be included in any redistribution
 #endif
 
 #if defined SSD1306_128_64
-  #define SSD1306_LCDWIDTH                  128
-  #define SSD1306_LCDHEIGHT                 64
+#define SSD1306_LCDWIDTH                  128
+#define SSD1306_LCDHEIGHT                 64
 #endif
 #if defined SSD1306_128_32
   #define SSD1306_LCDWIDTH                  128
@@ -110,41 +110,53 @@ All text above, and the splash screen must be included in any redistribution
 #define SSD1306_VERTICAL_AND_LEFT_HORIZONTAL_SCROLL 0x2A
 
 class Adafruit_SSD1306 : public Adafruit_GFX {
- public:
-  Adafruit_SSD1306(int8_t SID, int8_t SCLK, int8_t DC, int8_t RST, int8_t CS);
-  Adafruit_SSD1306(int8_t DC, int8_t RST, int8_t CS);
-  Adafruit_SSD1306(int8_t RST);
+public:
+    Adafruit_SSD1306(int8_t SID, int8_t SCLK, int8_t DC, int8_t RST, int8_t CS);
 
-  void begin(uint8_t switchvcc = SSD1306_SWITCHCAPVCC, uint8_t i2caddr = SSD1306_I2C_ADDRESS);
-  void ssd1306_command(uint8_t c);
-  void ssd1306_data(uint8_t c);
+    Adafruit_SSD1306(int8_t DC, int8_t RST, int8_t CS);
 
-  void clearDisplay(void);
-  void invertDisplay(uint8_t i);
-  void display();
+    Adafruit_SSD1306(int8_t RST);
 
-  void startscrollright(uint8_t start, uint8_t stop);
-  void startscrollleft(uint8_t start, uint8_t stop);
+    void begin(uint8_t switchvcc = SSD1306_SWITCHCAPVCC, uint8_t i2caddr = SSD1306_I2C_ADDRESS);
 
-  void startscrolldiagright(uint8_t start, uint8_t stop);
-  void startscrolldiagleft(uint8_t start, uint8_t stop);
-  void stopscroll(void);
+    void ssd1306_command(uint8_t c);
 
-  void dim(bool dim);
+    void ssd1306_data(uint8_t c);
 
-  void drawPixel(int16_t x, int16_t y, uint16_t color);
+    void clearDisplay(void);
 
-  virtual void drawFastVLine(int16_t x, int16_t y, int16_t h, uint16_t color);
-  virtual void drawFastHLine(int16_t x, int16_t y, int16_t w, uint16_t color);
+    void invertDisplay(uint8_t i);
 
- private:
-  int8_t _i2caddr, _vccstate, sid, sclk, dc, rst, cs;
-  void fastSPIwrite(uint8_t c);
+    void display();
 
-  boolean hwSPI;
+    void startscrollright(uint8_t start, uint8_t stop);
 
-  inline void drawFastVLineInternal(int16_t x, int16_t y, int16_t h, uint16_t color) __attribute__((always_inline));
-  inline void drawFastHLineInternal(int16_t x, int16_t y, int16_t w, uint16_t color) __attribute__((always_inline));
+    void startscrollleft(uint8_t start, uint8_t stop);
+
+    void startscrolldiagright(uint8_t start, uint8_t stop);
+
+    void startscrolldiagleft(uint8_t start, uint8_t stop);
+
+    void stopscroll(void);
+
+    void dim(bool dim);
+
+    void drawPixel(int16_t x, int16_t y, uint16_t color);
+
+    virtual void drawFastVLine(int16_t x, int16_t y, int16_t h, uint16_t color);
+
+    virtual void drawFastHLine(int16_t x, int16_t y, int16_t w, uint16_t color);
+
+private:
+    int8_t _i2caddr, _vccstate, sid, sclk, dc, rst, cs;
+
+    void fastSPIwrite(uint8_t c);
+
+    boolean hwSPI;
+
+    inline void drawFastVLineInternal(int16_t x, int16_t y, int16_t h, uint16_t color) __attribute__((always_inline));
+
+    inline void drawFastHLineInternal(int16_t x, int16_t y, int16_t w, uint16_t color) __attribute__((always_inline));
 
 };
 
