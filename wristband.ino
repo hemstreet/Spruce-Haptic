@@ -15,12 +15,12 @@ Adafruit_SSD1306 display(OLED_MOSI, OLED_CLK, OLED_DC, OLED_RESET, OLED_CS);
 
 int isVibrating = 0;
 
-void testScreen(String command);
+int testScreen(String command);
 
 void setup()   {                
     Serial.begin(9600);
 
-    //Spark.function("test", testScreen);
+    Spark.function("test", testScreen);
 
   pinMode(D7, OUTPUT);
 
@@ -43,13 +43,10 @@ void setup()   {
   
 }
 
-void testScreen(String command)
+int testScreen(String command)
 {
 
-  //if(command == "testing")
-  //{
-
-   display.clearDisplay();
+    display.clearDisplay();
 
     display.setTextSize(1.5);
     display.setTextColor(WHITE);
@@ -59,7 +56,8 @@ void testScreen(String command)
     display.println("Qty: 5");
     display.display();
 
-  //}
+
+  return 1;
 
 }
 
