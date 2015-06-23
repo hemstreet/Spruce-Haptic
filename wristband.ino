@@ -56,17 +56,10 @@ int displayText(String command)
 
     digitalWrite(D7, LOW);
 
-    delay(2000);
-
   return 1;
 
 }
 
 void loop() {
-      
-//
-//    digitalWrite(D7, (isVibrating) ? HIGH : LOW);
-//    isVibrating = !isVibrating;
-//    delay(2500);
     
 }
