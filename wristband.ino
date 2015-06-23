@@ -20,7 +20,7 @@ int testScreen(String command);
 void setup()   {                
     Serial.begin(9600);
 
-    Spark.function("test", testScreen);
+    Spark.function("display", displayText);
 
   pinMode(D7, OUTPUT);
 
@@ -33,29 +33,30 @@ void setup()   {
 
   display.setTextSize(1.5);
   display.setTextColor(WHITE);
-  display.println("Shoe Request");
-  display.println("Type: Para Black");
-  display.println("Size: 10 1/2");
-  display.println("Qty: 2");
+  display.println("Spruce");
   display.display();
   delay(2000);
 
   
 }
 
-int testScreen(String command)
+int displayText(String command)
 {
 
     display.clearDisplay();
-
-    display.setTextSize(1.5);
-    display.setTextColor(WHITE);
-    display.println("Test Screen");
-    display.println("Type: Testing");
-    display.println("Size: 1 1/2");
-    display.println("Qty: 5");
+    display.setCursor(0,0);
+    display.println(command);
     display.display();
 
+    delay(2000);
+
+    digitalWrite(D7, HIGH);
+
+    delay(2000);
+
+    digitalWrite(D7, LOW);
+
+    delay(2000);
 
   return 1;
 
