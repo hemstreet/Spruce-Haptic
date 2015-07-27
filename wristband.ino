@@ -5,8 +5,8 @@
 #define OLED_MOSI   D0
 #define OLED_CLK    D1
 #define OLED_DC     D2
-#define OLED_CS     D3
-#define OLED_RESET  D4
+#define OLED_CS     D4
+#define OLED_RESET  D3
 Adafruit_SSD1306 display(OLED_MOSI, OLED_CLK, OLED_DC, OLED_RESET, OLED_CS);
 
 #if (SSD1306_LCDHEIGHT != 64)
@@ -50,7 +50,7 @@ int displayText(String command)
 
     delay(2000);
 
-    digitalWrite(D7, HIGH);
+    digitalWrite(D1, HIGH);
 
     delay(2000);
 
